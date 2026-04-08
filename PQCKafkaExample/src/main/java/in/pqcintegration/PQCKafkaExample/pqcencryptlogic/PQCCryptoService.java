@@ -19,14 +19,14 @@ public class PQCCryptoService {
         Security.addProvider(new BouncyCastlePQCProvider());
     }
 
-    // 🔑 Generate Kyber KeyPair
+    //Generate Kyber KeyPair
     public KeyPair generateKyberKeyPair() throws Exception {
         KeyPairGenerator kpg = KeyPairGenerator.getInstance("Kyber", "BCPQC");
         kpg.initialize(KyberParameterSpec.kyber512);
         return kpg.generateKeyPair();
     }
 
-    // 🔐 Producer: Encapsulation
+    //Producer: Encapsulation
     public EncapsulationResult encapsulate(PublicKey publicKey) throws Exception {
 
         KeyGenerator keyGen = KeyGenerator.getInstance("Kyber", "BCPQC");
@@ -41,7 +41,7 @@ public class PQCCryptoService {
         );
     }
 
-    // 🔓 Consumer: Decapsulation
+    //Consumer: Decapsulation
     public byte[] decapsulate(PrivateKey privateKey, byte[] encapsulation) throws Exception {
 
         KeyGenerator keyGen = KeyGenerator.getInstance("Kyber", "BCPQC");
@@ -51,7 +51,7 @@ public class PQCCryptoService {
         return secretKey.getEncoded();
     }
 
-    // 🔐 AES Encrypt
+    // AES Encrypt
     public byte[] encrypt(byte[] data, byte[] sharedSecret) throws Exception {
         byte[] keyBytes = Arrays.copyOf(sharedSecret, 16);
         Cipher cipher = Cipher.getInstance("AES");
@@ -59,7 +59,7 @@ public class PQCCryptoService {
         return cipher.doFinal(data);
     }
 
-    // 🔓 AES Decrypt
+    // AES Decrypt
     public byte[] decrypt(byte[] data, byte[] sharedSecret) throws Exception {
         byte[] keyBytes = Arrays.copyOf(sharedSecret, 16);
         Cipher cipher = Cipher.getInstance("AES");
@@ -67,7 +67,7 @@ public class PQCCryptoService {
         return cipher.doFinal(data);
     }
 
-    // 🔁 Encode/Decode Public Key
+    // Encode/Decode Public Key
     public byte[] encodePublicKey(PublicKey key) {
         return key.getEncoded();
     }
